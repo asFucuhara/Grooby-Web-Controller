@@ -35,14 +35,14 @@ router.get('/rewind/:guildId', (req, res) => {
 
 router.get('/getQueue/:guildId', (req, res) => {
   const { guildId } = req.params;
-  getQueue(guildId);
-  res.send('ok');
+  res.send(getQueue(guildId));
 });
 
 router.get('/addToQueue/:guildId/:url', (req, res) => {
   const { guildId, url } = req.params;
+  console.log('ok');
   addToQueue(guildId, url);
-  res.send('ok');
+  res.send(getQueue(guildId));
 });
 
 module.exports = router;

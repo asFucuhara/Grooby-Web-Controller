@@ -9,8 +9,7 @@ const serverList = new Map(); //todo: maybe put this map on reids
 //   voiceChannel: voiceChannel,
 //   connection: null,
 //   songs: [{ // for now equals to url only (not obj)
-//       id: video.id,
-//       **title: Util.escapeMarkdown(video.title),
+//       youtubeId: video.id,
 //       url: `https://www.youtube.com/watch?v=${video.id}`
 //     }],
 //   volume: 5,
@@ -35,8 +34,6 @@ const generateServer = guild => {
   } else {
     serverList.get(guildId).guildObj = guild;
   }
-
-  //console.log('figure out this shit bro, must start server with -web');
 
   return serverList.get(guildId);
 };
@@ -71,6 +68,7 @@ const play = async guild => {
         play(guild);
       })
       .on('error', error => console.error(error));
+      console.log('a');
 
     dispatcher.setVolumeLogarithmic(server.volume / 5);
   } catch (error) {
@@ -82,7 +80,7 @@ const play = async guild => {
 const addToQueue = (guildId, songUrl) => {
   //song = song url ** playlist url and song string(africa toto) should be treated in discord
   const server = serverList.get(guildId);
-  //console.log('addToQueue', guildId, server);
+  
 
   server.songs.push(songUrl);
   if (server.songs.length <= 1) play(guildId);
