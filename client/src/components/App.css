@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 10 px
+}
+
+div{
+  border: 1px solid #282c34;
+}
+
+.searchBar{
+  grid-column: 1/ span 2;
+} 
+
+.videoList {
+  height: 300px,
+}
