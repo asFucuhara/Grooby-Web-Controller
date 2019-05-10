@@ -4,7 +4,16 @@ const app = express();
 require('./controllers/discord');
 
 app.use('/web/', require('./controllers/web'));
-app.use('/', (req, res) => res.send('ok'));
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+} else {
+  app.use('/', (req, res) => {
+    res.send('ok');
+  });
+}
 
 app.listen(5000, () => console.log('listening.......'));
